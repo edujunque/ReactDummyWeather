@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 var Examples = (props) => {
   return(
     <div>
-      <h1 className="text-center">Examples!</h1>
+      <h3 className="text-center">Examples!</h3>
       <p>here are a few examples to try out:</p>
       <ol>
         <li>

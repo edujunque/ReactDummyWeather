@@ -38,8 +38,7 @@ var Weather = React.createClass({
   },
   componentDidMount: function () {
     let locationObject = queryString.parse(this.props.location.search);
-    // let location = locationObject.location
-    // alert(locationObject.location);
+
     if (locationObject.location && locationObject.location.length > 0){
       this.handleSearch(locationObject.location);
       // window.location.hash = '#/';
@@ -48,6 +47,14 @@ var Weather = React.createClass({
       // withRouter((history) => { history.push('/asdasdas')});
       alert('ok');
       // this.context.history.push('/')
+    }
+  },
+  componentWillReceiveProps: function (newProps) {
+    let location = newProps.location.search;
+
+    if (location && location.length > 0){
+      this.handleSearch(location);
+      browserHistory.push('/');
     }
   },
   render: function (){

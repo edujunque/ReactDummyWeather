@@ -1,6 +1,6 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 var Main = require('Main');
 var Weather = require('Weather');
@@ -14,14 +14,14 @@ require('style!css!sass!applicationStyles')
 $(document).foundation();
 
 ReactDOM.render(
-  <BrowserRouter>
-    <Main>
+  <Router history={history}>
+    <Main history={history}>
       <Switch>
         <Route exact path="/" component={Weather}/>
         <Route path="/about" component={About}/>
         <Route path="/examples" component={Examples}/>
       </Switch>
     </Main>
-  </BrowserRouter>,
+  </Router>,
   document.getElementById('app')
 );

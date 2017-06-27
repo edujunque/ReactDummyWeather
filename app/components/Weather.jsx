@@ -1,6 +1,5 @@
 var React = require('react');
 var queryString = require('query-string');
-import {browserHistory} from 'react-router-dom';
 var WeatherForm = require('WeatherForm');
 var WeatherMessage = require('WeatherMessage');
 var OpenWeatherMap = require('OpenWeatherMap');
@@ -41,12 +40,7 @@ var Weather = React.createClass({
 
     if (locationObject.location && locationObject.location.length > 0){
       this.handleSearch(locationObject.location);
-      // window.location.hash = '#/';
-      // browserHistory.push('/');
-      browserHistory.push('/');
-      // withRouter((history) => { history.push('/asdasdas')});
-      alert('ok');
-      // this.context.history.push('/')
+      this.props.history.push('/');
     }
   },
   componentWillReceiveProps: function (newProps) {
@@ -54,7 +48,7 @@ var Weather = React.createClass({
 
     if (location && location.length > 0){
       this.handleSearch(location);
-      browserHistory.push('/');
+      this.props.history.push('/');
     }
   },
   render: function (){

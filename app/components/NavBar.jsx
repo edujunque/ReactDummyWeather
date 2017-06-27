@@ -1,5 +1,5 @@
 var React = require('react');
-var {IndexLink, Link, NavLink} = require('react-router-dom');
+var {IndexLink, Link, NavLink, browserHistory} = require('react-router-dom');
 
 // var Nav = React.createClass({
 //   render: function (){
@@ -17,7 +17,14 @@ var {IndexLink, Link, NavLink} = require('react-router-dom');
 var Nav = React.createClass({
   onSearch: function(e){
     e.preventDefault();
-    alert('Não ta pronto ainda');
+    let location = this.refs.search.value;
+    let encodedLocation = encodeURIComponent(location);
+
+    if (location.length > 0){
+      this.refs.search.value = '';
+      // window.location.hash = '#/?location=' + encodedLocation;
+      browserHistory.push(`/?location=${encodedLocation}`);
+    }
   },
   render: function(){
     return(
@@ -40,7 +47,7 @@ var Nav = React.createClass({
           <form onSubmit={this.onSearch}>
             <ul className="menu">
               <li>
-                <input type="search" placeholder="Enter city name"/>
+                <input ref="search" type="search" placeholder="Enter city name"/>
               </li>
               <li>
                 <input type="submit" className="button" value="Get weather"/>

@@ -1,8 +1,11 @@
 var React = require('react');
+var queryString = require('query-string');
+import {browserHistory} from 'react-router-dom';
 var WeatherForm = require('WeatherForm');
 var WeatherMessage = require('WeatherMessage');
 var OpenWeatherMap = require('OpenWeatherMap');
 var ErrorModal = require('ErrorModal');
+
 
 var Weather = React.createClass({
   getInitialState: function(){
@@ -15,7 +18,9 @@ var Weather = React.createClass({
 
     this.setState({
       isLoading: true,
-      errorMessage: undefined
+      errorMessage: undefined,
+      location: undefined,
+      temp: undefined
     });
 
     OpenWeatherMap.getTemp(location).then(function(temp){
@@ -30,6 +35,20 @@ var Weather = React.createClass({
         errorMessage: e.message
       });
     });
+  },
+  componentDidMount: function () {
+    let locationObject = queryString.parse(this.props.location.search);
+    // let location = locationObject.location
+    // alert(locationObject.location);
+    if (locationObject.location && locationObject.location.length > 0){
+      this.handleSearch(locationObject.location);
+      // window.location.hash = '#/';
+      // browserHistory.push('/');
+      browserHistory.push('/');
+      // withRouter((history) => { history.push('/asdasdas')});
+      alert('ok');
+      // this.context.history.push('/')
+    }
   },
   render: function (){
     var {isLoading, location, temp, errorMessage} = this.state;
